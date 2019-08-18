@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
+import sys
 
 # function to scrape web page for listing details and return dictionary
 def scrape(url, tag, classDescription):
@@ -59,9 +60,9 @@ def createCSV(data):
     CSV = data.to_csv(r'houseData.csv', index = None)
 
 # driver code
-data = generateData(15)
+numDataPoints = int(sys.argv[1])
+data = generateData(numDataPoints)
 featureNames = getFeatures(data)
 data = formatData(featureNames, data)
 data = pd.DataFrame(data)
-print(data)
 createCSV(data)
