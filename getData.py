@@ -1,4 +1,4 @@
-# example web scraping for getting housing data 
+# file that web scrapes pages to extract data and then properly formats it to be used by the ML model
 
 import requests
 from bs4 import BeautifulSoup
