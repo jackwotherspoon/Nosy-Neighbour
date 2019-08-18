@@ -38,9 +38,20 @@ def getFeatures(data):
         for feature in features:
             if feature not in allFeatures:
                 allFeatures.append(feature)
-    print(allFeatures)
     return allFeatures
 
+def formatData(featureNames, data):
+    # loop through data and fill in missing fields with NULL
+    for i in range(0, len(data)):
+        features = [*data[i]]
+        for feature in featureNames:
+            if feature not in features:
+                data[i][feature] = "NULL"
+    return data
+
 # driver code
-data = generateData(5)
+data = generateData(25)
 featureNames = getFeatures(data)
+data = formatData(featureNames, data)
+data = pd.DataFrame(data)
+print(data)
