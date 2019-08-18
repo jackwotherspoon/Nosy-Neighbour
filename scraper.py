@@ -49,9 +49,13 @@ def formatData(featureNames, data):
                 data[i][feature] = "NULL"
     return data
 
+def createCSV(data):
+    CSV = data.to_csv(r'houseData.csv', index = None)
+
 # driver code
 data = generateData(25)
 featureNames = getFeatures(data)
 data = formatData(featureNames, data)
 data = pd.DataFrame(data)
 print(data)
+createCSV(data)
