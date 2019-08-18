@@ -40,6 +40,7 @@ def getFeatures(data):
                 allFeatures.append(feature)
     return allFeatures
 
+# function to replace missing fields of dataframe with NULL 
 def formatData(featureNames, data):
     # loop through data and fill in missing fields with NULL
     for i in range(0, len(data)):
@@ -49,11 +50,16 @@ def formatData(featureNames, data):
                 data[i][feature] = "NULL"
     return data
 
+# function that checks currently saved CSV and adds data that isn't already in it
 def createCSV(data):
+    oldData = pd.read_csv('houseData.csv')
+    oldData['MLS® #'] = oldData['MLS® #'].astype(str)
+    mergedData = pd.concat([data, oldData], ignore_index= True)
+    mergedData = mergedData.drop_duplicates(subset = "MLS® #", keep = 'first')
     CSV = data.to_csv(r'houseData.csv', index = None)
 
 # driver code
-data = generateData(25)
+data = generateData(15)
 featureNames = getFeatures(data)
 data = formatData(featureNames, data)
 data = pd.DataFrame(data)
