@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 
-def scrape(url, tag, classDescription, dataset):
+def scrape(url, tag, classDescription):
     page = requests.get(url, timeout = 5)
     if (page.status_code == 200):
         content = BeautifulSoup(page.content, "html.parser")
@@ -18,11 +18,14 @@ def scrape(url, tag, classDescription, dataset):
     else:
         print("ERROR: Page request was unsuccessful.")
 
-data = []
-# successful function call
-data.append(scrape("https://www.ottawarealestate.ca/search/details/no/10/", "div", "prop-descrip", data))
-data.append(scrape("https://www.ottawarealestate.ca/search/details/no/9/", "div", "prop-descrip", data))
-print(data)
+def generateData(size):
+    # initialize empty list to store data
+    data = []
+    for i in range(0, size):
+        # loop through different pages of house listings and add to data
+        link = "https://www.ottawarealestate.ca/search/details/no/{}/".format(i)
+        data.append(scrape(link, "div", "prop-descrip"))
+    return data
 
-# failure function call
-scrape("https://www.garbage.com/url", "div", "prop-descrip", data)
+# driver code
+data = generateData(5)
