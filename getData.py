@@ -1,4 +1,4 @@
-# file that web scrapes pages to extract data and then properly formats it to be used by the ML model
+# file that web scrapes pages to extract data and then properly formats it to a CSV file
 
 import requests
 from bs4 import BeautifulSoup
