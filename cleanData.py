@@ -4,7 +4,7 @@ import pandas as pd
 # function to clean data
 def clean(data):
     # drop unneeded columns from dataframe
-    newData = data.drop(columns = ['MLS® #', 'Status', 'Subtype', 'Country', 'Community Features'], axis = 1)
+    newData = data.drop(columns = ['MLS® #', 'Status', 'Subtype', 'Country', 'Community Features', 'Heating', 'Sewer', 'Frontage Length', 'Flooring', 'Fencing', 'Architectural Style', 'View'], axis = 1)
     return newData
 
 data = pd.read_csv('houseData.csv')
