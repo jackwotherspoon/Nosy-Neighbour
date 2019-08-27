@@ -34,7 +34,9 @@ def clean(data):
     newData['Garage'] = newData['Garage'].fillna('0')
     storiesMedian = newData['Stories'].median() # compute median for number of stories in the data set
     newData['Stories'] = newData['Stories'].fillna(storiesMedian) # fill missing stories field with median
-    newData['Cooling'] = newData['Cooling'].fillna('Central air conditioning')
+    newData['Cooling'] = newData['Cooling'].fillna('Central air conditioning') # fill missing cooling data with most common result
+    
+    # call missing data function again to compare to previous time
     missingData(newData)
 
     return newData
