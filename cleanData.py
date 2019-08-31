@@ -21,7 +21,7 @@ def clean(data):
     corrmat = newData.corr()
     f, ax = plt.subplots(figsize = (12,9))
     sns.heatmap(corrmat, vmax =.8, square = True)
-    # plt.show()
+    plt.show()
 
     # call missing data function on data
     missingData(newData)
@@ -38,7 +38,6 @@ def clean(data):
     
     # call missing data function again to compare to previous time
     missingData(newData)
-
     return newData
 
 # function that calculates percentage of missing data in each column
@@ -49,5 +48,6 @@ def missingData(data):
     print(missing)
     return missing
 
+# driver code
 data = pd.read_csv('houseData.csv')
 data = clean(data)
