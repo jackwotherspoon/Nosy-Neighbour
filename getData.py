@@ -56,7 +56,7 @@ def createCSV(data):
     oldData['MLS® #'] = oldData['MLS® #'].astype(str)
     mergedData = pd.concat([data, oldData], ignore_index= True)
     mergedData = mergedData.drop_duplicates(subset = "MLS® #", keep = 'first')
-    CSV = data.to_csv(r'houseData.csv', index = None)
+    data.to_csv(r'houseData.csv', index = None)
 
 # driver code
 numDataPoints = int(sys.argv[1])
