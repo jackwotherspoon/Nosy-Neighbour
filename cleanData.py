@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 # function to clean data
 def clean(data):
     # drop unneeded columns from dataframe (TODO: Find way to get 'Lot Size' back in dataset)
-    newData = data.drop(columns = ['MLS® #', 'Lot Size' 'Status', 'Subtype', 'Country', 'Community Features', 'Heating', 'Sewer', 'Frontage Length', 'Flooring', 'Fencing', 'Architectural Style', 'View', 'Ownership', 'Lot Features', 'Construction Materials', 'Attached Garage', 'Levels'], axis = 1)
+    newData = data.drop(columns = ['MLS® #', 'Lot Size', 'Status', 'Subtype', 'Country', 'Community Features', 'Heating', 'Sewer', 'Frontage Length', 'Flooring', 'Fencing', 'Architectural Style', 'View', 'Ownership', 'Lot Features', 'Construction Materials', 'Attached Garage', 'Levels'], axis = 1)
    
     # need to perform multivariable analysis as features are categorical and numerical
     categorical = newData.select_dtypes(include = ['object']).columns
@@ -51,4 +51,5 @@ def missingData(data):
 # driver code
 data = pd.read_csv('houseData.csv')
 data = clean(data)
+data.to_csv(r'cleanedData.csv', index = None)
 print(data)
