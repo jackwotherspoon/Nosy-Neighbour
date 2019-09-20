@@ -27,6 +27,7 @@ def clean(data):
     # call missing data function on data
     missingData(newData)
     
+    # TODO: Change this from hardcoded
     # fill in missing data fields
     newData['Pool'] = newData['Pool'].fillna('No')
     newData['Waterfront'] = newData['Waterfront'].fillna('No')
@@ -40,11 +41,13 @@ def clean(data):
     # call missing data function again to compare to previous time
     missingData(newData)
 
+    # TODO: Change this from hardcoded
     # convert columns with yes/no entries to 0 and 1s
     newData['Pool'] = newData['Pool'].map(dict(Yes=1, No=0))
     newData['Garage'] = newData['Garage'].map(dict(Yes=1, No=0))
     newData['Waterfront'] = newData['Waterfront'].map(dict(Yes=1, No=0))
 
+    # TODO: Change this from hardcoded
     # label encode categorical data
     le = preprocessing.LabelEncoder()
     newData['Type'] = le.fit_transform(newData['Type'])
