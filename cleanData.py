@@ -21,7 +21,7 @@ def clean(data):
     corrmat = newData.corr()
     f, ax = plt.subplots(figsize = (12,9))
     sns.heatmap(corrmat, vmax =.8, square = True)
-    plt.show()
+    # plt.show()
 
     # call missing data function on data
     missingData(newData)
@@ -31,13 +31,19 @@ def clean(data):
     newData['Waterfront'] = newData['Waterfront'].fillna('No')
     newData['Fireplaces'] = newData['Fireplaces'].fillna('0')
     newData['Parking Spaces'] = newData['Parking Spaces'].fillna('0')
-    newData['Garage'] = newData['Garage'].fillna('0')
+    newData['Garage'] = newData['Garage'].fillna('No')
     storiesMedian = newData['Stories'].median() # compute median for number of stories in the data set
     newData['Stories'] = newData['Stories'].fillna(storiesMedian) # fill missing stories field with median
     newData['Cooling'] = newData['Cooling'].fillna('Central air conditioning') # fill missing cooling data with most common result
     
     # call missing data function again to compare to previous time
     missingData(newData)
+
+    # convert columns with yes/no entries to 0 and 1s
+    newData['Pool'] = newData['Pool'].map(dict(Yes=1, No=0))
+    newData['Garage'] = newData['Garage'].map(dict(Yes=1, No=0))
+    newData['Waterfront'] = newData['Waterfront'].map(dict(Yes=1, No=0))
+    
     return newData
 
 # function that calculates percentage of missing data in each column
