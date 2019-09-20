@@ -2,6 +2,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn import preprocessing
 
 # function to clean data
 def clean(data):
@@ -43,6 +44,13 @@ def clean(data):
     newData['Pool'] = newData['Pool'].map(dict(Yes=1, No=0))
     newData['Garage'] = newData['Garage'].map(dict(Yes=1, No=0))
     newData['Waterfront'] = newData['Waterfront'].map(dict(Yes=1, No=0))
+
+    # label encode categorical data
+    le = preprocessing.LabelEncoder()
+    newData['Type'] = le.fit_transform(newData['Type'])
+    newData['Subdivision'] = le.fit_transform(newData['Subdivision'])
+    newData['Heating Fuel'] = le.fit_transform(newData['Heating Fuel'])
+    newData['Cooling'] = le.fit_transform(newData['Cooling'])
     
     return newData
 
