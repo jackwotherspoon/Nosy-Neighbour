@@ -57,6 +57,16 @@ def clean(data):
     
     return newData
 
+# function to preprocess the data 
+def preprocess(data):
+    scaler = preprocessing.MinMaxScaler()
+    x_data = data.drop(columns = 'List Price')
+    scaledData = pd.DataFrame(scaler.fit_transform(x_data))
+    scaledData.insert(0,'List Price', data['List Price'])
+    # print(scaledData)
+
+    return scaledData
+
 # function that calculates percentage of missing data in each column
 def missingData(data):
     data_na = (data.isnull().sum() / len(data)) * 100
@@ -68,5 +78,6 @@ def missingData(data):
 # driver code
 data = pd.read_csv('houseData.csv')
 data = clean(data)
+preprocess(data)
 data.to_csv(r'cleanedData.csv', index = None)
 print(data)
