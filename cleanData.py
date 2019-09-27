@@ -77,6 +77,6 @@ def missingData(data):
 # driver code
 data = pd.read_csv('houseData.csv')
 data = clean(data)
-preprocess(data)
+data = preprocess(data)
 data.to_csv(r'cleanedData.csv', index = None)
 print(data)
