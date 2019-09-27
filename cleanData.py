@@ -60,10 +60,9 @@ def clean(data):
 # function to preprocess the data 
 def preprocess(data):
     scaler = preprocessing.MinMaxScaler()
-    x_data = data.drop(columns = 'List Price')
-    scaledData = pd.DataFrame(scaler.fit_transform(x_data))
-    scaledData.insert(0,'List Price', data['List Price'])
-    # print(scaledData)
+    scaledData = data.drop(columns = 'List Price')
+    scaledData = pd.DataFrame(scaler.fit_transform(scaledData.values), columns=scaledData.columns, index=scaledData.index)
+    scaledData.insert(0, 'List Price', data['List Price'])
 
     return scaledData
 
