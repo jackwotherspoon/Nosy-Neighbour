@@ -59,10 +59,14 @@ def clean(data):
 
 # function to preprocess the data 
 def preprocess(data):
+    # min max normalization
     scaler = preprocessing.MinMaxScaler()
     scaledData = data.drop(columns = 'List Price')
     scaledData = pd.DataFrame(scaler.fit_transform(scaledData.values), columns=scaledData.columns, index=scaledData.index)
     scaledData.insert(0, 'List Price', data['List Price'])
+    # make list price into a float
+    scaledData['List Price'] = scaledData['List Price'].str.replace('$', '')
+    scaledData['List Price'] = scaledData['List Price'].str.replace(',', '')
 
     return scaledData
 
