@@ -16,13 +16,23 @@ def splitData(data):
 # function to train model on training set
 def train(trainData):
     trainLabels = trainData.pop('List Price')
+    # create linear model
+    linearModel = LinearRegression()
+    linearModel.fit(trainData, trainLabels)
     
+    return linearModel
+
 # function to test model on test set
-def test(testData):
+def test(testData, linModel):
     testLabels = testData.pop('List Price')
+    actual = testLabels[:1].to_string(index = False)
+    predicted = linModel.predict(testData[:1])
+    print("Actual price of house is $", actual)
+    print("Predicted price of house is $", int(predicted))
 
 # driver code
 data = pd.read_csv('cleanedData.csv')
 print(data)
 trainingData, testingData = splitData(data)
-train(trainingData)
+linModel = train(trainingData)
+test(testingData, linModel)
